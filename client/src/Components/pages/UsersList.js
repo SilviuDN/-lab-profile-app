@@ -1,5 +1,7 @@
 import {Component} from 'react'
+import UserCard from './UserCard'
 import UsersService from '../../services/users.service'
+import {Row, Col} from 'react-bootstrap'
 
 class UsersList extends Component{
 
@@ -27,7 +29,10 @@ class UsersList extends Component{
             ?
             <h2>Loading...</h2>
             :
-            this.state.users.map( (el, index) => <p key={index}>{el.username}</p>)
+            <Row>
+                {this.state.users.map( (user, index) => <UserCard {...user}/>)}
+            </Row>
+            
 
             )
     }

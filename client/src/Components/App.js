@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import UsersPage from './pages/UsersPage';
 import {Switch, Route} from 'react-router-dom'

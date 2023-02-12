@@ -1,0 +1,19 @@
+.userCard{
+    margin: 2em;
+
+}
+
+.userCard h3{
+    margin-top: 1em;
+    text-align: center;
+}
+
+.userCard img{
+    height:20em;
+    object-fit: cover;
+    width: 100%;
+}
+
+.userCard Button{
+    width: 100%;
+} 
