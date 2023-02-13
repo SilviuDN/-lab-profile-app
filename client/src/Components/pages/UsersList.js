@@ -30,7 +30,7 @@ class UsersList extends Component{
             <h2>Loading...</h2>
             :
             <Row>
-                {this.state.users.map( (user, index) => <UserCard {...user}/>)}
+                {this.state.users.map( (user, index) => <UserCard {...user} key={user._id}/>)}
             </Row>
             
 

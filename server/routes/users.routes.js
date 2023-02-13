@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
         .catch( err => res.status(500).json({code: 500, message: `Error fetching users: ${err}`}))
 })
 
-router.get('/getUser/:user_id', (req, res) => {
+router.get('/details/:user_id', (req, res) => {
     const user_id = req.params.user_id
     User
         .findById(user_id)
