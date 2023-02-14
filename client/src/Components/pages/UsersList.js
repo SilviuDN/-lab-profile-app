@@ -1,7 +1,8 @@
 import {Component} from 'react'
 import UserCard from './UserCard'
 import UsersService from '../../services/users.service'
-import {Row, Col} from 'react-bootstrap'
+import {Row, Button} from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 class UsersList extends Component{
 
@@ -30,6 +31,9 @@ class UsersList extends Component{
             <h2>Loading...</h2>
             :
             <Row>
+                <Link to={`/users/newUser`}>
+                    <Button variant="dark" size="lg">New User</Button>
+                </Link>
                 {this.state.users.map( (user, index) => <UserCard {...user} key={user._id}/>)}
             </Row>
             
