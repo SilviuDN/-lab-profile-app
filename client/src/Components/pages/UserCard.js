@@ -11,6 +11,7 @@ const UserCard = ({username, _id, image, campus, course}) => {
                 <Card.Title>User: {username}</Card.Title>
                 <Card.Text>
                     <>Campus: {campus}</>
+                    <br></br>
                     <>Course: {course}</>
                 </Card.Text>
                 <Link to={`/users/details/${_id}`}>

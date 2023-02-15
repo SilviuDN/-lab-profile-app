@@ -6,6 +6,7 @@ const User = require("./../models/User.model")
 router.get("/", (req, res) => {
     User
         .find()
+        .sort({createdAt: -1})
         .then( response => setTimeout( () => res.json(response), 1000))
         .catch( err => res.status(500).json({code: 500, message: `Error fetching users: ${err}`}))
 })
