@@ -49,8 +49,8 @@ router.post('/login', (req, res) => {
             }
 
             req.session.currentUser = user
-            res.json(req.session.currentUser)
-            // res.json(req.session)
+            res.json(req.session)
+            // res.json(req.session.currentUser)
         })
         .catch(err => res.status(500).json({ code: 500, message: 'DB error while fetching user', err }))
 })
@@ -61,11 +61,8 @@ router.post('/login', (req, res) => {
 // })
 
 router.get('/logout', (req, res) => {
-    console.log(`Adio, ${req.session?.username}`)
     req.session.destroy((err) => {
-        req.session = null
         res.json({ message: `Logout successful ` })});
-        // res.json({ message: `Logout successful ${req.session?.currentUser}` })});
 })
 
 router.post('/isLoggedIn', (req, res) => {

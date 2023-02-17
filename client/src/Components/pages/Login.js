@@ -28,7 +28,7 @@ class Login extends Component{
             .login(this.state)
             .then( loggedUserFromServer => {
                 this.props.history.push('/')
-                this.props.storeUser(loggedUserFromServer.data)
+                this.props.storeUser(loggedUserFromServer.data.currentUser)
                 // this.props.toggleModal()
                 // this.props.loadUsers()
                 this.setState({

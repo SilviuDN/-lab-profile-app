@@ -1,11 +1,11 @@
 import UsersList from "./UsersList"
 import {Container} from 'react-bootstrap'
 
-const UsersPage = () => {
+const UsersPage = ({loggedUser}) => {
     return(
         <Container>
             <h1>Users' list</h1>
-            <UsersList/>
+            <UsersList loggedUser={loggedUser}/>
         </Container>
     )
 }

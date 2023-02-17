@@ -36,6 +36,7 @@ class UsersList extends Component{
     }
 
     render(){
+        console.log(this.props)
         return (            
             // <h2>Loading...</h2>
             !this.state.users
@@ -43,7 +44,12 @@ class UsersList extends Component{
             <h2>Loading...</h2>
             :
             <>
-            <Button onClick={this.toggleModal} variant="dark" size="lg">New User</Button>
+            {
+                this.props.loggedUser 
+                &&
+                <Button onClick={this.toggleModal} variant="dark" size="lg">New User</Button>
+            }
+            
             <Row>
                 {this.state.users.map( (user, index) => <UserCard {...user} key={user._id}/>)}
             </Row>

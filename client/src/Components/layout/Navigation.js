@@ -7,11 +7,10 @@ const Navigation = ({storeUser, loggedUser}) => {
   const authService = new AuthService()
 
   const logout = () => {
-    // console.log("Heeeeeeeeeeeeeeyyyyyyyyy!")
     authService
       .logout()
       .then( () => storeUser(undefined) )
-      .catch( err => console.log('There is one error:' , err) )
+      .catch( err => console.log('We have a logout error:' , err) )
   }
 
   return (
@@ -24,10 +23,22 @@ const Navigation = ({storeUser, loggedUser}) => {
             <Link to="/" className="nav-link">Home</Link>
             <Link to="/users" className="nav-link">Users</Link>
             <Link to="/users/newUser" className="nav-link">New user</Link>
-            <Link to="/signup" className="nav-link">Signup</Link>
-            <Link to="/login" className="nav-link">Login</Link>
-            <span className="nav-link" onClick={logout}>Logout</span>
-            <span className="nav-link" >Hello, {loggedUser ? loggedUser.username : "invitad@"}!</span>
+            
+            {
+              loggedUser 
+              ?
+              <>
+                <Link to="/user-profile" className="nav-link">My profile</Link>
+                <span className="nav-link" onClick={logout} style={{cursor: "pointer"}}>Logout</span>
+                <span className="nav-link" >Hello, {loggedUser ? loggedUser.username : "invitad@"}!</span>                
+              </>
+              :
+              <>
+                <Link to="/signup" className="nav-link">Signup</Link>
+                <Link to="/login" className="nav-link">Login</Link>    
+              </>
+            }
+
           </Nav>
         </Navbar.Collapse>
       </Container>
