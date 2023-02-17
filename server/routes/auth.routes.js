@@ -32,6 +32,7 @@ router.post('/signup', (req, res) => {
 router.post('/login', (req, res) => {
 
     const { username, pwd } = req.body
+    // console.log(`Before, ${{...req.session}}`)
 
     User
         .findOne({ username })
@@ -55,8 +56,16 @@ router.post('/login', (req, res) => {
 })
 
 
+// router.get('/logout', (req, res) => {
+//     req.session.destroy((err) => res.json({ message: 'Logout successful' }, err));
+// })
+
 router.get('/logout', (req, res) => {
-    req.session.destroy((err) => res.json({ mssage: 'Logout successful' }));
+    console.log(`Adio, ${req.session?.username}`)
+    req.session.destroy((err) => {
+        req.session = null
+        res.json({ message: `Logout successful ` })});
+        // res.json({ message: `Logout successful ${req.session?.currentUser}` })});
 })
 
 router.post('/isLoggedIn', (req, res) => {

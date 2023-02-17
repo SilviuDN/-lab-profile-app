@@ -1,11 +1,10 @@
 import { Component } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import UsersService from "../../services/users.service";
-import UserDetails from "./UserDetails";
+import AuthService from "../../services/auth.service";
 
-class UserForm extends Component{
-    constructor(props){
+class Signup extends Component{
+    constructor(){
         super()
         this.state = {
             username: '', 
@@ -15,7 +14,7 @@ class UserForm extends Component{
             campus: '', 
             course: ''
         }
-        this.usersService = new UsersService()
+        this.authService = new AuthService()
     }
 
     handleInputChange = e => {
@@ -29,11 +28,12 @@ class UserForm extends Component{
     handleFormSubmit = e => {
         e.preventDefault()
 
-        this.usersService
-            .postUser(this.state)
+        this.authService
+            .signup(this.state)
             .then( response => {
-                this.props.toggleModal()
-                this.props.loadUsers()
+                this.props.history.push('/login')
+                // this.props.toggleModal()
+                // this.props.loadUsers()
                 this.setState({
                     username: '', 
                     email: '', 
@@ -50,7 +50,7 @@ class UserForm extends Component{
     render(){
         return(
             <Container>
-                <h2>New user</h2>
+                <h2>Register</h2>
                 <Row className="justify-content-center" style={{marginTop: '2em'}}>
                     <Col md={6}>
                         <Form onSubmit = {this.handleFormSubmit}>
@@ -72,7 +72,7 @@ class UserForm extends Component{
                             <Form.Group className="mb-3" controlId="password">
                                 
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" name ="pwd" value={this.state.password} onChange={this.handleInputChange} />
+                                <Form.Control type="password" name ="pwd" value={this.state.pwd} onChange={this.handleInputChange} />
                                 
                             </Form.Group>
 
@@ -98,20 +98,19 @@ class UserForm extends Component{
                             </Form.Group>
 
 
-                            <Button variant="success" type="submit" style={{width: '100%', marginTop: '1em'}}>Submit</Button>
-
-                            {/* <Link to='/users'>
-                                <Button variant="dark" type="submit">All users</Button>
-                            </Link> */}
+                            <Button variant="success" type="submit" style={{width: '100%', margin: '1em 0'}}>Submit</Button>
 
                         </Form>
+
+                        <Link to='/users'>
+                            <Button variant="dark" style={{width: '100%', margin: '1em 0'}}>All users</Button>
+                        </Link>
                     </Col>
                 </Row>
 
             </Container>
-
         )
     }
 }
 
-export default UserForm
+export default Signup

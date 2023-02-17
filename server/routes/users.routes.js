@@ -21,6 +21,7 @@ router.get('/details/:user_id', (req, res) => {
 
 router.post("/newUser", (req, res) => {
     const user = req.body
+    user.password = user.pwd
     User
         .create(user)
         .then(response => res.json(response))
