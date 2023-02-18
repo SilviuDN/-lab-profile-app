@@ -36,7 +36,7 @@ class UsersList extends Component{
     }
 
     render(){
-        console.log(this.props)
+        // console.log(this.props)
         return (            
             // <h2>Loading...</h2>
             !this.state.users

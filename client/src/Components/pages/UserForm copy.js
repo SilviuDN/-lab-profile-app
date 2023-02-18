@@ -26,46 +26,44 @@ class UserForm extends Component{
     handleInputChange = e => {
         const {name, value} = e.target
         this.setState({ user: { ...this.state.user, [name]: value } })
+
+        // this.setState({
+        //     [name]: value
+        // })
     }
 
     handleFormSubmit = e => {
         e.preventDefault()
 
         this.usersService
-            .postUser(this.state.user)
-            .then( () => {
+            .postUser(this.state)
+            .then( response => {
                 this.props.toggleModal()
                 this.props.loadUsers()
                 this.setState({
-                    user: {
-                        username: '', 
-                        email: '', 
-                        pwd: '',
-                        image: '', 
-                        campus: '', 
-                        course: ''
-                    },
-                    isUploading: false
-                }                
-                ) 
+                    username: '', 
+                    email: '', 
+                    pwd: '',
+                    image: '', 
+                    campus: '', 
+                    course: ''
+                }) 
             })
             .catch( err => console.log(err))
 
     }
 
 
-    handleFileUpload = (e) => {
+    handleFileUpload(e) {
 
         this.setState({ isUploading: true })
 
         const uploadData = new FormData()
         uploadData.append('imageData', e.target.files[0])
 
-
         this.uploadsService
             .uploadimage(uploadData)
-            // .then(response => this.setState({ isUploading: false, user: { ...this.state.user, image: 'response.data.secure_url' } }))
-            .then(response => this.setState({ isUploading: false, user: { ...this.state.user, image: response.data.secure_url } }))
+            .then(response => this.setState({ isUploading: false, coaster: { ...this.state.coaster, imageUrl: response.data.secure_url } }))
             .catch(err => console.log(err))
     }
 
@@ -80,28 +78,28 @@ class UserForm extends Component{
                             <Form.Group className="mb-3" controlId="username">
 
                                 <Form.Label>UserName</Form.Label>
-                                <Form.Control type="text" name ="username" value={this.state.user.username} onChange={this.handleInputChange}/>
+                                <Form.Control type="text" name ="username" value={this.state.username} onChange={this.handleInputChange}/>
 
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="email">
                                 
                                 <Form.Label>Email</Form.Label>
-                                <Form.Control type="text" name ="email" value={this.state.user.email} onChange={this.handleInputChange} />
+                                <Form.Control type="text" name ="email" value={this.state.email} onChange={this.handleInputChange} />
 
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="password">
                                 
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" name ="pwd" value={this.state.user.password} onChange={this.handleInputChange} />
+                                <Form.Control type="password" name ="pwd" value={this.state.password} onChange={this.handleInputChange} />
                                 
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="campus">
                                 
                                 <Form.Label>Campus</Form.Label>
-                                <Form.Control type="text" name ="campus" value={this.state.user.campus} onChange={this.handleInputChange} />
+                                <Form.Control type="text" name ="campus" value={this.state.campus} onChange={this.handleInputChange} />
 
                             </Form.Group>
 
@@ -112,7 +110,7 @@ class UserForm extends Component{
 
                             </Form.Group>
 
-                            <Form.Group controlId="image">
+                            <Form.Group controlId="imageUrl">
                                 <Form.Label>Imagen (URL)</Form.Label>
                                 <Form.Control type="file" onChange={e => this.handleFileUpload(e)} />
                             </Form.Group>   
