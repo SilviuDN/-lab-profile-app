@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import UsersService from "../../services/users.service";
 import UploadsService from "../../services/uploads.service";
 import UserDetails from "./UserDetails";
+import Spinner from "../shared/Spinner";
 
 class UserForm extends Component{
     constructor(props){
@@ -124,12 +125,13 @@ class UserForm extends Component{
 
                             </Form.Group> */}
 
+                            {this.state.isUploading && <Spinner size='lg' shape='circle'/>}
 
-                            <Button variant="success" type="submit" style={{width: '100%', marginTop: '1em'}}>Submit</Button>
-
-                            {/* <Link to='/users'>
-                                <Button variant="dark" type="submit">All users</Button>
-                            </Link> */}
+                            <Button variant="success" type="submit" style={{width: '100%', marginTop: '1em'}} disabled={this.state.isUploading }>
+                                {this.state.isUploading ? 'Uploading' : "Submit"}
+                            </Button>
+                            
+                            {/* <Button variant="success" type="submit" style={{width: '100%', marginTop: '1em'}}>Submit</Button> */}
 
                         </Form>
                     </Col>

@@ -4,6 +4,7 @@ import UsersService from '../../services/users.service'
 import {Row, Button, Modal} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import UserForm from './UserForm'
+import Spinner from '../shared/Spinner'
 
 class UsersList extends Component{
 
@@ -41,7 +42,10 @@ class UsersList extends Component{
             // <h2>Loading...</h2>
             !this.state.users
             ?
-            <h2>Loading...</h2>
+            <>
+                <h2>Loading...</h2>
+                <Spinner size='lg' shape='circle'/>
+            </>
             :
             <>
             {

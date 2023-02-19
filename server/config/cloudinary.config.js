@@ -1,5 +1,5 @@
 const cloudinary = require('cloudinary').v2
-// const cloudinary = require('cloudinary') // GRESIT
+// const cloudinary = require('cloudinary') // OJO!!!
 const { CloudinaryStorage } = require('multer-storage-cloudinary')
 const multer = require('multer')
 
