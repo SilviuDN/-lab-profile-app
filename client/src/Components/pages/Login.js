@@ -36,7 +36,9 @@ class Login extends Component{
                     pwd: '',
                 }) 
             })
-            .catch( err => console.log(err))
+            .catch( err => {
+                this.props.showAlert(err.response.data.message)
+            })
 
     }
 
